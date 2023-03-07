@@ -30,8 +30,21 @@ class CustomerPolicy
      */
     public function view(User $user, Customer $customer)
     {
-           return $user['id'] === $customer['user_id'];
+        return $user->hasRole('admin') || $user->id === $customer->user_id;
     }
+
+
+    public function show(User $user, Customer $customer)
+    {
+        return $user->hasRole('admin') || $user->id === $customer->user_id;
+    }
+
+
+    public function store(User $user, Customer $customer)
+    {
+        return $user->hasRole('admin') || $user->id === $customer->user_id;
+    }
+
 
     /**
      * Determine whether the user can create models.
@@ -53,7 +66,7 @@ class CustomerPolicy
      */
     public function update(User $user, Customer $customer)
     {
-        return $user['id'] === $customer['user_id'];
+        return $user->hasRole('admin') || $user->id === $customer->user_id;
     }
 
     /**
@@ -65,7 +78,7 @@ class CustomerPolicy
      */
     public function delete(User $user, Customer $customer)
     {
-        return $user['id'] === $customer['user_id'];
+        return $user->hasRole('admin') || $user->id === $customer->user_id;
     }
 
     /**
@@ -89,6 +102,6 @@ class CustomerPolicy
      */
     public function forceDelete(User $user, Customer $customer)
     {
-        return $user['id'] === $customer['user_id'];
+        return $user->hasRole('admin') || $user->id === $customer->user_id;
     }
 }

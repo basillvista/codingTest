@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+//
+//    public function __construct()
+//    {
+//        $this->middleware(IsAdmin::class);
+//    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +23,6 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $this->authorize('index', CustomerPolicy::class);
         return CustomerResource::collection(Customer::all());
     }
 
@@ -36,8 +41,9 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $customer)
     {
+        dd($request->all());
         $this->authorize('store', CustomerPolicy::class);
         $customer = Customer::create($request->all());
         return response()->json($customer, 201);
@@ -49,9 +55,10 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show(Request $request, Customer $customer)
     {
-        $this->authorize('show', CustomerPolicy::class);
+        $this->authorize('view', $customer);
+
         return response()->json($customer, 200);
     }
 

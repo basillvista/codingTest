@@ -4,8 +4,11 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Customer;
+use App\Models\Role;
 use App\Models\User;
+use Database\Factories\RoleFactory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +19,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(30)->create();
-        Customer::factory(30)->create();
+        DB::transaction(function () {
+            Role::create([
+                'name' => 'user',
+                'display_name' => 'user',
+                'description' => 'Users role',
+            ]);
+            Role::create([
+                'name' => 'admin',
+                'display_name' => 'admin',
+                'description' => 'admins role',
+            ]);
+        });
+
     }
 }

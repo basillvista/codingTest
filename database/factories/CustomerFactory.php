@@ -21,7 +21,7 @@ class CustomerFactory extends Factory
     {
         return [
             'name'=>$this->faker->name(),
-            'user_id'=>rand(1, 30),
+            'user_id'=>$this->faker->numberBetween(1, 2000),
         ];
     }
 
