@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\CustomerResource;
 use App\Models\Customer;
 use Illuminate\Http\Request;
@@ -35,7 +36,8 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        return new CustomerResource($request);
+        $customer = Customer::create($request->all());
+        return response()->json($customer, 201);
     }
 
     /**
@@ -44,9 +46,9 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($customer)
+    public function show(Customer $customer)
     {
-        return new CustomerResource($customer);
+        return response()->json($customer, 200);
     }
 
     /**
@@ -67,7 +69,7 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $customer)
+    public function update(Request $request, Customer $customer)
     {
         $customer->update($request->all());
         return response()->json($customer, 200);
@@ -79,9 +81,9 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($customer)
+    public function destroy(Customer $customer)
     {
         $customer->delete();
-        return response()->json($customer, 204);
+        return response()->json(NULL, 204);
     }
 }

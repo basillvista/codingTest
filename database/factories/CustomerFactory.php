@@ -17,9 +17,6 @@ class CustomerFactory extends Factory
      *
      * @return array<string, mixed>
      */
-
-    protected $model = Customer::class;
-
     public function definition()
     {
         return [
@@ -27,4 +24,7 @@ class CustomerFactory extends Factory
             'user_id'=>rand(1, 30),
         ];
     }
+
+    protected $model = Customer::class;
+
 }
