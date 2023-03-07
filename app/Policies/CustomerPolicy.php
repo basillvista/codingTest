@@ -41,7 +41,7 @@ class CustomerPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class CustomerPolicy
      */
     public function update(User $user, Customer $customer)
     {
-        //
+        return $user['id'] === $customer['user_id'];
     }
 
     /**
@@ -65,7 +65,7 @@ class CustomerPolicy
      */
     public function delete(User $user, Customer $customer)
     {
-        //
+        return $user['id'] === $customer['user_id'];
     }
 
     /**
@@ -77,7 +77,7 @@ class CustomerPolicy
      */
     public function restore(User $user, Customer $customer)
     {
-        //
+
     }
 
     /**
@@ -89,6 +89,6 @@ class CustomerPolicy
      */
     public function forceDelete(User $user, Customer $customer)
     {
-        //
+        return $user['id'] === $customer['user_id'];
     }
 }
