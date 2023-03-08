@@ -10,11 +10,6 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-//
-//    public function __construct()
-//    {
-//        $this->middleware(IsAdmin::class);
-//    }
 
     /**
      * Display a listing of the resource.
@@ -41,10 +36,9 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $customer)
+    public function store(Request $request, Customer $customer)
     {
-        dd($request->all());
-        $this->authorize('store', CustomerPolicy::class);
+        $this->authorize('store', $customer);
         $customer = Customer::create($request->all());
         return response()->json($customer, 201);
     }
@@ -58,7 +52,6 @@ class CustomerController extends Controller
     public function show(Request $request, Customer $customer)
     {
         $this->authorize('view', $customer);
-
         return response()->json($customer, 200);
     }
 
@@ -82,7 +75,7 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        $this->authorize('update', CustomerPolicy::class);
+        $this->authorize('view',$customer);
         $customer->update($request->all());
         return response()->json($customer, 200);
     }
@@ -95,7 +88,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        $this->authorize('destroy', CustomerPolicy::class);
+        $this->authorize('delete', $customer);
         $customer->delete();
         return response()->json(NULL, 204);
     }

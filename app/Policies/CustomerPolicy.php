@@ -42,7 +42,7 @@ class CustomerPolicy
 
     public function store(User $user, Customer $customer)
     {
-        return $user->hasRole('admin') || $user->id === $customer->user_id;
+        return $user->hasRole('admin') || $user->hasRole('user') || $user->id === $customer->user_id;
     }
 
 

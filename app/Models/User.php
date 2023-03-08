@@ -49,9 +49,15 @@ class User extends Authenticatable
         return $this->hasMany(Customer::class);
     }
 
-    public function attachRoleForUser(){
+    public function attachAdminRoleForUser(){
         return $this->attachRole('admin');
     }
+
+    public function attachUserRoleForUser(){
+        return $this->attachRole('user');
+    }
+
+
 
     public function role(){
         return $this->hasMany(Role::class);

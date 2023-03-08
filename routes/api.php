@@ -19,5 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('isAdmin')->group(function(){
-    Route::apiResource('customers', \App\Http\Controllers\Api\CustomerController::class);
+    Route::apiResource('customers', \App\Http\Controllers\Api\CustomerController::class)->except(['create', 'store']);
 });
+
+Route::post('customers', [\App\Http\Controllers\Api\CustomerController::class, 'store'])->name('customers.store');
+//Route::get('customers/')
