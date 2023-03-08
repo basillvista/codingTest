@@ -32,14 +32,7 @@ class CustomerRESTTest extends TestCase
 
     }
 
-//    public function testCreate(){
-//        $user = User::factory()->create();
-//        $this->actingAs($user);
-//        $response =  $this->actingAs($user)->get('/api/customer/create');
-//
-//        $response->assertStatus(200);
-//    }
-//
+
     public function testShow(){
             $user = User::factory()->create();
             $user->attachUserRoleForUser();
