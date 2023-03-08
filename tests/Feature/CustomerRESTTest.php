@@ -23,6 +23,7 @@ class CustomerRESTTest extends TestCase
         $customer = Customer::factory()->create(['user_id'=>$user->id]);
         $customerAdmin = Customer::factory()->create(['user_id' => $admin->id]);
 
+
         $response = $this->actingAs($admin)->get('/api/customers');
         $response->assertStatus(200);
 
@@ -64,6 +65,7 @@ class CustomerRESTTest extends TestCase
 
         $customerAdmin = Customer::factory()->create(['user_id'=>$admin->id])->toArray();
         $customer = Customer::factory()->create(['user_id' => $user->id])->toArray();
+
 
         $response = $this->actingAs($user)->post('/api/customers/', $customer);
         $response->assertStatus(201);

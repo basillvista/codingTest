@@ -32,5 +32,15 @@ class DatabaseSeeder extends Seeder
             ]);
         });
 
+
+        User::factory(1000)->create()->each(function ($user) {
+            $user->attachUserRoleForUser();
+        });
+
+        Customer::factory(1000)->create();
+
+        User::factory(3)->create()->each(function ($user){
+            $user->attachAdminRoleForUser();
+        });
     }
 }
